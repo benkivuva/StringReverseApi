@@ -15,4 +15,7 @@ An endpoint that reverses phrases
 - python3 manage.py runserver
 - Head to the browser on th provided localhost link
 
-
+# Dockerization
+- Run the application as a docker image
+- docker run njogu487/reverseapi:0.0.1 then
+- docker up
