@@ -3,8 +3,9 @@ executors:
   docker-publisher:
     environment:
       IMAGE_NAME: njogu487/reverseapi
-    docker:
-      - image: circleci/buildpack-deps:stretch
+        docker:
+          - image: cimg/python:3.8.13
+        working_directory: /repo
 
 jobs:
   build:
@@ -20,14 +21,14 @@ jobs:
           name: Archive Docker Image
           command: docker save -o image.tar $IMAGE_NAME
       - persist_to_workspace:
-          root: .
+          root: /repo
           paths:
-            - ./image.tar
+            - /repo/image.tar
   publish-latest:
     executor: docker-publisher
     steps:
       - attach_workspace:
-          at: /tmp/workspace
+          at: /repo
       - setup_remote_docker
       - run:
           name: Load archived Docker
@@ -44,7 +45,7 @@ jobs:
     executor: docker-publisher
     steps:
       - attach_workspace:
-          at: /tmp/workspace
+          at: /repo
       - setup_remote_docker
       - run:
           name: Load archived Docker
