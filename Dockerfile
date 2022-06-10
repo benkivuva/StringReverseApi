@@ -6,13 +6,13 @@ ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
 # set a directory in Docker
-WORKDIR /tmp
+WORKDIR /tmp/workspace
 
 # copy the requirements file
-COPY requirements.txt /tmp
+COPY requirements.txt /tmp/workspace
 
 #install dependencies
 RUN pip3 install -r requirements.txt
 
 #copy files
-COPY . /tmp
+COPY . /tmp/workspace
