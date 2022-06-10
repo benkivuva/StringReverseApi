@@ -6,3 +6,4 @@
 docker/build/*/Dockerfile
 !docker/plays/
 !util/install/
+!.dockerhubcredentials
