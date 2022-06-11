@@ -39,7 +39,7 @@ jobs:
           name: Archive Docker Image
           command: docker save -o image.tar $IMAGE_NAME
       - persist_to_workspace:
-          root: ~/repo
+          root: .
           paths:
             - ~/repo/image.tar
   publish-latest:
