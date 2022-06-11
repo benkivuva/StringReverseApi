@@ -41,7 +41,7 @@ jobs:
       - persist_to_workspace:
           root: .
           paths:
-            - /tmp/workspace/image.tar
+            - ./image.tar
   publish-latest:
     executor: docker-publisher
     steps:
