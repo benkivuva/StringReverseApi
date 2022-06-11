@@ -5,7 +5,7 @@ executors:
       IMAGE_NAME: njogu487/reverseapi
     docker:
       - image: cimg/python:3.8.13
-    working_directory: ~/repo
+    
 
 jobs:
   build:
@@ -21,18 +21,18 @@ jobs:
           name: Archive Docker Image
           command: docker save -o image.tar $IMAGE_NAME
       - persist_to_workspace:
-          root: /repo
+          root: .
           paths:
-            - /repo/image.tar
+            - ./image.tar
   publish-latest:
     executor: docker-publisher
     steps:
       - attach_workspace:
-          at: /repo
+          at: /tmp/workspace
       - setup_remote_docker
       - run:
           name: Load archived Docker
-          command: docker load -i /repo/image.tar
+          command: docker load -i /tmp/workspace/image.tar
       - run:
           name: Publish Docker Image to Docker Hub
           command: |
@@ -45,11 +45,11 @@ jobs:
     executor: docker-publisher
     steps:
       - attach_workspace:
-          at: /repo
+          at: /tmp/workspace
       - setup_remote_docker
       - run:
           name: Load archived Docker
-          command: docker load -i /repo/image.tar
+          command: docker load -i /tmp/workspace/image.tar
       - run:
           name: Publish Docker Image to Docker Hub
           command: |
