@@ -3,9 +3,9 @@ executors:
   docker-publisher:
     environment:
       IMAGE_NAME: njogu487/reverseapi
-        docker:
-          - image: cimg/python:3.8.13
-        working_directory: /repo
+      docker:
+        - image: cimg/python:3.8.13
+      working_directory: /repo
 
 jobs:
   build:
