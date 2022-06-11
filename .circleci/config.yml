@@ -41,7 +41,7 @@ jobs:
       - persist_to_workspace:
           root: .
           paths:
-            - ~/repo/image.tar
+            - /repo/image.tar
   publish-latest:
     executor: docker-publisher
     steps:
@@ -51,7 +51,7 @@ jobs:
           docker_layer_caching: true
       - run:
           name: Load archived Docker
-          command: docker load -i ~/repo/image.tar
+          command: docker load -i /repo/image.tar
       - run:
           name: Publish Docker Image to Docker Hub
           command: |
@@ -65,12 +65,12 @@ jobs:
     executor: docker-publisher
     steps:
       - attach_workspace:
-          at: ~/repo
+          at: /repo
       - setup_remote_docker:
           docker_layer_caching: true
       - run:
           name: Load archived Docker
-          command: docker load -i ~/repo/image.tar
+          command: docker load -i /repo/image.tar
       - run:
           name: Publish Docker Image to Docker Hub
           command: |
