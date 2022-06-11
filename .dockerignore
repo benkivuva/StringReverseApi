@@ -1,7 +1,0 @@
-*
-!playbooks/
-!docker/devstack_common_ansible_overrides.yml
-!docker/build/*/*.yml
-!docker/plays/
-!util/install/
-!.dockerhubcredentials
