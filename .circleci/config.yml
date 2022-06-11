@@ -56,10 +56,10 @@ jobs:
           name: Publish Docker Image to Docker Hub
           command: |
             echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
-            TAG = "0.0.${CIRCLE_BUILD_NUM}"
-            docker tag $IMAGE_NAME:latest $IMAGE_NAME:$TAG
+            IMAGE_TAG = "0.0.${CIRCLE_BUILD_NUM}"
+            docker tag $IMAGE_NAME:latest $IMAGE_NAME:$IMAGE_TAG
             docker push $IMAGE_NAME:latest
-            docker push $IMAGE_NAME:$MAGE_TAG
+            docker push $IMAGE_NAME:$IMAGE_TAG
   publish-tag:
     executor: docker-publisher
     steps:
@@ -74,10 +74,15 @@ jobs:
           name: Publish Docker Image to Docker Hub
           command: |
             echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
-            TAG = ${CIRCLE_TAG/v/''}
-            docker tag $IMAGE_NAME:latest $IMAGE_NAME:$TAG
+            IMAGE_TAG = ${CIRCLE_TAG/v/''}
+            docker tag $IMAGE_NAME:latest $IMAGE_NAME:$IMAGE_TAG
             docker push $IMAGE_NAME:latest
-            docker push $IMAGE_NAME:$MAGE_TAG
+            docker push $IMAGE_NAME:$IMAGE_TAG
+      # - run:
+      #     name: Deploy app to a serverless platform using docker
+      #     command: |
+
+
 workflows:
   version: 2
   build-main:
