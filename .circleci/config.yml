@@ -55,7 +55,6 @@ jobs:
       - run:
           name: Publish Docker Image to Docker Hub
           command: |
-            . venv/bin/activate
             echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
             IMAGE_TAG = "0.0.${CIRCLE_BUILD_NUM}"
             docker tag $IMAGE_NAME:latest $IMAGE_NAME:$IMAGE_TAG
@@ -74,7 +73,6 @@ jobs:
       - run:
           name: Publish Docker Image to Docker Hub
           command: |
-            . venv/bin/activate
             echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
             IMAGE_TAG = ${CIRCLE_TAG/v/''}
             docker tag $IMAGE_NAME:latest $IMAGE_NAME:$IMAGE_TAG
