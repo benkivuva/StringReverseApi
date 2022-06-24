@@ -1,0 +1,14 @@
+# version of the docker compose
+version: "3.3"
+
+#We can have many services for example db
+# For our case we assume we are using sqlite3 database for development
+services:
+  web:
+    #build the current directory
+    build: .
+    command: python3 /DockerHOME/manage.py runserver 127.0.0.1:8000 
+    volumes:
+      - .:/DockerHOME
+    ports:
+      - 8000:8000
